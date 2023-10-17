@@ -1,0 +1,519 @@
+---
+title: "Applications of Instance-Based Learning Theory: Using the SpeedyIBL Library to Construct Computational Models"
+title-slide-attributes:
+  font-size: 10
+author:
+  - name: Erin H. Bugbee
+    affiliation: Carnegie Mellon University
+  - name: Thuy Ngoc Nguyen
+    affiliation: University of Dayton
+  - name: Cleotilde Gonzalez
+    affiliation: Carnegie Mellon University
+format: 
+  revealjs:
+    incremental: true   
+    slide-number: true
+    theme: custom.scss
+editor: visual
+bibliography: references.bib
+csl: apa-single-spaced.csl
+embed-resources: true
+slide-level: 3
+execute:
+  echo: true
+include-in-header:
+  - text: |
+      <style>
+      #title-slide .title {
+        font-size: 2em;
+      }
+      </style>
+#jupyter: python3
+engine: knitr
+---
+
+## Agenda
+
+1.  Introduction to Instance-Based Learning Theory
+2.  Introduction to the SpeedyIBL Library with a Binary Choice Task Example
+3.  Building an IBL Model for the Iowa Gambling Task
+4.  Conclusion and Additional Applications
+
+# Introduction to Instance-Based Learning Theory
+
+## Complex, Dynamic Decision Making (DDM)
+
+-   Dynamic and sequential multi-attribute decisions that are interdependent over-time
+
+-   High uncertainty and change at different time scales 
+
+-   Dynamic allocation of limited resources (time, drones, people)
+
+-   There is not enough time for considering all alternatives before making a choice
+
+-   Human cognitive abilities are limited (attention, memory)
+
+## **Machine AI and Complex Societal DDM Problems**
+
+-   Machine AI is supporting complex DDM problems in multiple ways --- aggregating data, detecting patterns, and forecasting and projecting events based on data
+-   But often there is not enough data, particularly regarding high-level decisions
+    -   Requires a deep understanding of context, consideration of multiple and possibly conflicting factors and their consequences
+
+    -   The incorporation of ethical and moral trade-offs
+
+------------------------------------------------------------------------
+
+<br><br> <br><br>
+
+> The ultimate **responsibility for complex decisions lies, and *will continue to lie*, with humans.**
+
+## Why Should Machines Learn? Herbert A. Simon, 1983
+
+::: columns
+::: {.column width="20%"}
+![](https://www.cmu.edu/simon/images/herbertsimon2.jpg)
+:::
+
+::: {.column width="80%"}
+*Artificial intelligence has two goals.*
+
+*First, AI is directed toward getting computers to be smart and do smart things so that human beings don't have to do them.*
+
+*And second, AI (sometimes called cognitive simulation, or information processing psychology) is also directed at using computers to simulate human beings, so that we can **find out how humans work and perhaps can help them to be a little better in their work.***
+:::
+:::
+
+## **Cognitive AI: cognitively-plausible algorithms that emulate human decision making (i.e., including biases & errors)**
+
+-   **Based on cognitive theory: explain how humans make dynamic decisions, including the prediction of cognitive biases (i.e., in the absence of data)**
+
+-   **Dynamic actionable models: able to learn and adapt to changes independently to predict human decisions**
+
+-   **Can represent human experience and be synchronized with human actions**
+
+-   **Can become collaborators with humans in teams**
+
+## **Building Human-Like Artificial Agents using IBLT**
+
+## **Using Microworlds in Laboratory Experiments to Study DDM**
+
+![](images/unnamed-5-01.png){fig-align="center"}
+
+## **Approach: Cognitive Architectures**
+
+::: columns
+::: {.column width="20%"}
+![](images/allen-newell.jpg.avif)
+:::
+
+::: {.column width="80%"}
+**Unified Theories of Cognition**
+
+Allen Newell, 1990
+
+A single system (mind) produces all aspects of human behavior
+
+-   Representation of cognitive steps in performing a task
+
+-   Explain how all the components of the mind worked to produce coherent cognition.
+:::
+:::
+
+# **ACT-R: A unified theory of cognition** [@anderson1998]
+
+[@gonzalez2003]
+
+# Introduction to the SpeedyIBL Library with a Binary Choice Task Example
+
+## SpeedyIBL Library
+
+[@nguyen2022]
+
+## Notebook: *Introduction_SpeedyIBL.ipynb*
+
+### Installing SpeedyIBL Library
+
+. . .
+
+::: {#cloud}
+::: nonincremental
+1.  **Using cloud-based online Jupyter Notebook such as Google Colab:**
+:::
+
+```{python}
+#| eval: false
+pip install -U speedyibl
+```
+:::
+
+. . .
+
+::: {#local}
+::: nonincremental
+2.  **Running locally:**
+
+-   Must have Python 3 installed
+-   (suggestion) Create a virtual Python Environment by running the following commands in your shell.
+:::
+
+```{python}
+#| eval: false
+python3 -m venv env
+
+source env/bin/activate
+
+pip install -U speedyibl
+```
+:::
+
+### Import the class Agent
+
+```{python}
+from speedyibl import Agent
+```
+
+### Inputs of the class Agent
+
+![](images/inputs.png){fig-alt="Description of inputs of the class Agent"}
+
+### Functions of the class Agent
+
+![](images/functions.png){fig-alt="Functions of the class Agent"}
+
+## Example: Binary Choice Task
+
+## Notebook: *Demonstration_BinaryChoice.ipynb*
+
+### The Binary Choice Task
+
+-   Choose one of two options: Option A or Option B
+
+    -   One option is **SAFE** always yielding a fixed medium outcome (3)
+
+    -   One option is **RISKY** yielding a high outcome (4) with probability of 0.8, and a low outcome (0) with the complementary probability of 0.2
+
+### Building an Agent
+
+. . .
+
+::: {#build}
+::: nonincremental
+-   Create an IBL agent for the binary choice task
+
+    -   Using the defaults for noise, decay, mismatchPenalty, and lendeque, we only need to pass the value of default utility
+
+```{python}
+agent = Agent(default_utility = 4.4)
+```
+:::
+:::
+
+### Defining and Choosing Options
+
+. . .
+
+::: {#options}
+::: nonincremental
+-   Define a list of options for the agent to choose
+
+```{python}
+options = ["A", "B"] # A is the safe option while B is the risky one
+```
+:::
+:::
+
+. . .
+
+::: {#choose}
+::: nonincremental
+-   Make the IBL agent choose one of the two options
+:::
+
+```{python}
+choice = agent.choose(options)
+```
+:::
+
+### Generate Reward
+
+. . .
+
+::: {#reward}
+::: nonincremental
+-   Define a function returning a reward that the agent will receive after choosing one option.
+:::
+
+```{python}
+import random
+def reward(choice):
+  if choice == "A":
+    r = 3
+  elif random.random() <= 0.8:
+    r = 4
+  else:
+    r = 0
+  return r
+```
+:::
+
+### Observe Reward
+
+. . .
+
+::: {#respond}
+::: nonincremental
+-   After choosing one option and observing the reward, use the function respond
+:::
+
+```{python}
+r = reward(choice)
+agent.respond(r)
+```
+:::
+
+### View Instances
+
+. . .
+
+::: {#instances}
+::: nonincremental
+-   To see how instances are stored in the memory
+:::
+
+```{python}
+agent.instances()
+```
+:::
+
+### Compute Activation, Probability, and Blended Values
+
+. . .
+
+::: {#activation}
+#### Activation {.nonincremental}
+
+```{python}
+print(agent.CompActivation(agent.t+1, "A"))
+print(agent.CompActivation(agent.t+1, "B"))
+```
+:::
+
+. . .
+
+::: {#probability-of-retrieval}
+#### Probability {.nonincremental}
+
+```{python}
+print(agent.CompProbability(agent.t+1, "A"))
+print(agent.CompProbability(agent.t+1, "B"))
+```
+:::
+
+. . .
+
+::: {#blended-values}
+#### Blended Values {.nonincremental}
+
+```{python}
+print(agent.CompBlended(agent.t+1, options))
+```
+:::
+
+### Simulating Choices for Many Rounds
+
+. . .
+
+::: {#simulation}
+::: nonincremental
+-   Conducting 1000 runs of 100 trials for the binary choice task, where each trial includes choosing one option, observing the reward, and storing the instance
+:::
+
+```{python}
+import time # to calculate time
+runs = 1000 # number of runs (participants)
+trials = 100 # number of trials (episodes)
+average_p = [] # to store average of performance (proportion of maximum reward expectation choice)
+average_time = [] # to save time
+```
+:::
+
+### Simulating Choices for Many Rounds
+
+. . .
+
+```{python}
+#| class-source: small_code
+#| classes: small_code
+
+for r in range(runs):
+  pmax = []
+  ttime = [0]
+  agent.reset() #clear the memory for a new run
+  for i in range(trials):
+    start = time.time()
+    choice = agent.choose(options) # choose one option from the list of two
+    # determine the reward that agent can receive
+    r = reward(choice)
+    # store the instance
+    agent.respond(r)
+    end = time.time()
+    ttime.append(ttime[-1] + end - start)
+    pmax.append(choice == "B")
+  average_p.append(pmax) # save performance of each run
+  average_time.append(ttime) # save time of each run
+```
+
+### Plotting Performance over Rounds
+
+. . .
+
+```{python}
+#| fig-align: "center"
+#| fig-width: 2
+import matplotlib.pyplot as plt
+import numpy as np
+plt.figure(figsize=(5, 3.5))
+plt.plot(range(trials), np.mean(np.asarray(average_p), axis=0), "o-", color = "darkgreen", markersize = 2, linestyle = '--', label = 'speedyIBL')
+plt.xlabel("Round")
+plt.ylabel("PMAX")
+plt.title("Performance")
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+# Building an IBL Model for the Iowa Gambling Task
+
+## Iowa Gambling Task: Beginning
+
+. . .
+
+::: {#igt}
+::: nonincremental
+-   To play the demo of game: <https://www.psytoolkit.org/experiment-library/igt.html>
+
+-   4 decks of cards (A, B, C, and D).
+
+-   Participants started with a "loan" of \$2000 and were told to make a profit.
+:::
+
+![](images/iowa1.png){fig-align="center" width="300"}
+:::
+
+. . .
+
+## Iowa Gambling Task: Choices
+
+. . .
+
+::: {#igt2}
+::: nonincremental
+-   Participants had to choose 100 cards in total, one at the time. Each time they choose a card, they get feedback about winning and/or losing some money.
+
+-   They did not know what each card would yield in advance (i.e., a lottery).
+
+::: columns
+::: {.column width="50%"}
+![](images/iowa2.png){fig-align="center" width="297"}
+:::
+
+::: {.column width="50%"}
+![](images/iowa3.png){fig-align="center" width="302"}
+:::
+:::
+:::
+:::
+
+## Task Environment
+
+-   Decks A and B always yielded \$100
+
+-   Decks C and D always yielded \$50
+
+-   For each card chosen, there is a 50% chance of having to pay a penalty as well. For decks A and B, the penalty is \$250, whereas for decks C and D it is \$50.
+
+## Notebook: *Exercise_IowaGambling.ipynb*
+
+### Steps
+
+1.  Install and import speedyibl
+2.  Define an IBL agent
+3.  Define list of options
+4.  Choose option from list of options
+5.  Store the observed reward to memory of the agent
+6.  Run the simulation and observe the plots for `default_utility=110` and `default_utility=10`
+7.  Vary the noise and decay parameters and plot the `PMAX` and `Average`Reward over rounds with `default_utility=110`
+8.  Run the simulation for varied parameter values and plot results
+
+## Notebook: *Solution_IowaGambling.ipynb*
+
+# Conclusion
+
+## Additional Applications
+
+## Gridworld
+
+-   A sequential decision making problem wherein a decision maker navigates through a grid by making sequential decisions about which actions to take (UP, DOWN, LEFT, RIGHT) to search for a target and avoid obstacles.
+
+    -   Dimension of environment: 3 x 4 grid that contains an obstacle (black cell)
+
+    -   Decision maker starts at an initial position (marked Start) and has a 25-step limit
+
+    -   One target which yields 1 point if the decision maker found it
+
+## IBL Model for Gridworld Environment
+
+::: nonincremental
+-   Delayed feedback as a result of sequence of choices as opposed to a single choice
+:::
+
+<div>
+
+```{python}
+#| eval: false
+agent.equal_delay_feedback(reward, episode_history)
+```
+
+</div>
+
+## Ms. Pacman from GymAI
+
+<div>
+
+<div>
+
+::: nonincremental
+-   Call Ms.Pacman environment using gym
+:::
+
+</div>
+
+```{python}
+#| eval: false
+
+import gym
+
+env = gym.make('MsPacman-v0')
+```
+
+</div>
+
+## Discussion
+
+We would be happy to hear your feedback on this workshop. What worked well, and what could we improve upon?
+
+## Thank you!
+
+DDMLab: [www.cmu.edu/ddmlab](www.cmu.edu/ddmlab)
+
+Interested in building IBL models?
+
+::: nonincremental
+-   SpeedyIBL: <https://github.com/DDM-Lab/SpeedyIBL>
+
+-   PyIBL: <https://www.cmu.edu/dietrich/sds/ddmlab/downloads.html#py-ibl>
+:::
+
+## References
+
+### References

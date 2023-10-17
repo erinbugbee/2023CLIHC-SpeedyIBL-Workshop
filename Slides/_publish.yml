@@ -1,0 +1,4 @@
+- source: 2023CLIHC-Speedy-IBL-Workshop.qmd
+  quarto-pub:
+    - id: b8b0216a-a097-48be-902b-38d8191bbffa
+      url: 'https://erinbugbee.quarto.pub/applications-of-instance-based-learning-theory-using-the-speedyibl-library-to-construct-computational-models'
