@@ -211,7 +211,7 @@ $$
 
 ## SpeedyIBL Library [@nguyen2022]
 
-## Notebook: *Introduction_SpeedyIBL.ipynb*
+## Notebook: [*Introduction_SpeedyIBL.ipynb*](https://github.com/DDM-Lab/2023CLIHC-SpeedyIBL-Workshop/blob/main/Introduction_SpeedyIBL.ipynb)
 
 ### Installing SpeedyIBL Library
 
@@ -264,7 +264,7 @@ from speedyibl import Agent
 
 ## Example: Binary Choice Task
 
-## Notebook: *Demonstration_BinaryChoice.ipynb*
+## Notebook: [*Demonstration_BinaryChoice.ipynb*](https://github.com/DDM-Lab/2023CLIHC-SpeedyIBL-Workshop/blob/main/Demonstration_BinaryChoice.ipynb)
 
 ### The Binary Choice Task
 
@@ -520,7 +520,7 @@ plt.show()
 
 -   For each card chosen, there is a 50% chance of having to pay a penalty as well. For decks A and B, the penalty is \$250, whereas for decks C and D it is \$50.
 
-## Notebook: *Exercise_IowaGambling.ipynb*
+## Notebook: [*Exercise_IowaGambling.ipynb*](https://github.com/DDM-Lab/2023CLIHC-SpeedyIBL-Workshop/blob/main/Exercise_IowaGambling.ipynb)
 
 ### Steps
 
@@ -536,7 +536,7 @@ plt.show()
 7.  Vary the noise and decay parameters and plot the `PMAX` and `Average`Reward over rounds with `default_utility=110`
 8.  Run the simulation for varied parameter values and plot results
 
-## Notebook: *Solution_IowaGambling.ipynb*
+## Notebook: [*Solution_IowaGambling.ipynb*](https://github.com/DDM-Lab/2023CLIHC-SpeedyIBL-Workshop/blob/main/Solution_IowaGambling.ipynb)
 
 # Conclusion
 
