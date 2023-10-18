@@ -21,6 +21,8 @@ execute:
   echo: true
 engine: knitr
 embed-resources: false
+#title-slide-attributes: 
+#  background-image: "https://www.cmu.edu/dietrich/sds/ddmlab/imgs/ddmlablogo.png"
 ---
 
 ## Agenda
@@ -162,7 +164,7 @@ A single system (mind) produces all aspects of human behavior
 ::: {.column width="50%" style="font-size: 30px;"}
 -   Decisions are stored over-time in memory (**Instances**) consisting of **Contextual features, Action, Outcome (Utility)**
 
--   For each potential Action i**nstances are Blended** accounting for similarity**,** to create an **expected utility**
+-   For each potential Action i**nstances are Blended** accounting for similarity, to create an **expected utility**
 
 -   The Action with the **highest Blended Value** is executed, and new instances are created.
 

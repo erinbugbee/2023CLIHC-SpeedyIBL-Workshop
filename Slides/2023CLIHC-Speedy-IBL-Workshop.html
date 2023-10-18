@@ -8,7 +8,7 @@
 <link href="2023CLIHC-Speedy-IBL-Workshop_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="2023CLIHC-Speedy-IBL-Workshop_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="2023CLIHC-Speedy-IBL-Workshop_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.340">
+  <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Erin H. Bugbee">
   <meta name="author" content="Thuy Ngoc Nguyen">
@@ -116,7 +116,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="2023CLIHC-Speedy-IBL-Workshop_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link rel="stylesheet" href="2023CLIHC-Speedy-IBL-Workshop_files/libs/revealjs/dist/theme/quarto.css">
   <link href="2023CLIHC-Speedy-IBL-Workshop_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="2023CLIHC-Speedy-IBL-Workshop_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="2023CLIHC-Speedy-IBL-Workshop_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -598,7 +598,7 @@ Cleotilde Gonzalez
 <div class="column" style="font-size: 30px;">
 <ul>
 <li class="fragment"><p>Decisions are stored over-time in memory (<strong>Instances</strong>) consisting of <strong>Contextual features, Action, Outcome (Utility)</strong></p></li>
-<li class="fragment"><p>For each potential Action i<strong>nstances are Blended</strong> accounting for similarity<strong>,</strong> to create an <strong>expected utility</strong></p></li>
+<li class="fragment"><p>For each potential Action i<strong>nstances are Blended</strong> accounting for similarity, to create an <strong>expected utility</strong></p></li>
 <li class="fragment"><p>The Action with the <strong>highest Blended Value</strong> is executed, and new instances are created.</p></li>
 <li class="fragment"><p>The <strong>Blended Value is updated</strong> with an experienced outcome through <strong>feedback</strong></p></li>
 </ul>
@@ -824,8 +824,8 @@ V_{kt} = \sum_{i=1}^{n_{kt}}P_{ik_it}x_{i k_i t}
 <div class="cell-output cell-output-stdout">
 <pre><code>option      outcome  occurences
 --------  ---------  ------------
-A               3    [1]
-A               4.4  [0]</code></pre>
+B               0    [1]
+B               4.4  [0]</code></pre>
 </div>
 </div>
 </div>
@@ -838,11 +838,11 @@ A               4.4  [0]</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="bu">print</span>(agent.CompActivation(agent.t<span class="op">+</span><span class="dv">1</span>, <span class="st">"A"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(array([ 0.04718564, -0.75736281]), array([3. , 4.4]))</code></pre>
+<pre><code>(array([0.10065413]), array([4.4]))</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a><span class="bu">print</span>(agent.CompActivation(agent.t<span class="op">+</span><span class="dv">1</span>, <span class="st">"B"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(array([-0.63733565]), array([4.4]))</code></pre>
+<pre><code>(array([ 0.00279563, -0.83960513]), array([0. , 4.4]))</code></pre>
 </div>
 </div>
 </div>
@@ -852,11 +852,11 @@ A               4.4  [0]</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a><span class="bu">print</span>(agent.CompProbability(agent.t<span class="op">+</span><span class="dv">1</span>, <span class="st">"A"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(array([0.73671117, 0.26328883]), array([3. , 4.4]))</code></pre>
+<pre><code>(array([1.]), array([4.4]))</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="bu">print</span>(agent.CompProbability(agent.t<span class="op">+</span><span class="dv">1</span>, <span class="st">"B"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(array([1.]), array([4.4]))</code></pre>
+<pre><code>(array([0.2901505, 0.7098495]), array([0. , 4.4]))</code></pre>
 </div>
 </div>
 </div>
@@ -866,7 +866,7 @@ A               4.4  [0]</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a><span class="bu">print</span>(agent.CompBlended(agent.t<span class="op">+</span><span class="dv">1</span>, options))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[(3.7894595712809487, 0), (4.4, 1)]</code></pre>
+<pre><code>[(4.4, 0), (1.6896031195326011, 1)]</code></pre>
 </div>
 </div>
 </div>
