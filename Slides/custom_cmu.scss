@@ -10,10 +10,11 @@ $author-font-size: 2vw !default;
 $author-font-weight: 200 !default;
 
 // Images
-$img-transition: url("https://dl.boxcloud.com/api/2.0/internal_files/524400474768/versions/555455301168/representations/png_paged_2048x2048/content/1.png?access_token=1!RwOB_Bm_uWxXroK7XGJlSjhfJ3FlZMex-UqSHQyP-wjkGkgV3Y6bEWBjNhoC3AZa9ZsbZ8Xx7i9DX7QVVmolf2GD5Iowh4nkzSen-iYosF4H4y63yLuiCaHhVEfKAoXErmOcWJpqy7lKjj3H1pMjHspzMn8ZYuEe7jOSBKgDFnvxRkd1sgEDNXo94eWp_cswwheriraQqxGS7LEfGxrpbuZS0_he-qjiSyD0R_-Fh0lcggOq34MV5G0qaTMHryMnj1YHF28oyUELjAiv0q50Ylf7i3tH8e5DCPT7IqXLXfYVthCySwhQby9WCEPFSR5UwTgkVzDrtWhQLiZVyL6xBnv8R77ZLSCarmuJeCq36xG10MBvSrQ5TJqp35YHbW1JlNWrX9jw7cEtDyiaQwZWJ2Q5URJu-auxdvITDdDSUdp05ev2JSWBR17J0F6D3aTmPIYxpgO_DC-MVELfzZkMPCchJ7TbhLjaDnTmhxsOSqLDgNxGgJkwyV0z8sVjy0MqUs1uufUPJad2c01NyA7NbKdrI2ONw-z4RR9A3W3fziggPBDtWwL3X8LHFzeEvEqfD2gE4jDrXP2HCtjYB6WcevlLsQIiveot4hRb4UHl2u7SVXnHF_YuYqF9kG4u6XcAfhG7-cYC_gXcuLrl5e_NRT-nRkBogEnBj0PRj28Z0c5quvoJj2sw4Nt1XFP70K0I04GuthRzvaL_Uqtxvk5LNPVzRoai76vfuqJ2InSvELQvKS7bc3CdiQ..&shared_link=https%3A%2F%2Fcmu.app.box.com%2Fs%2Fdq57l57u7pqkjrhcdae6pbuhcx02r29y&box_client_name=box-content-preview&box_client_version=2.102.0");
+$img-transition: url("https://github.com/erinbugbee/2023CLIHC-SpeedyIBL-Workshop/blob/main/Slides/images/cmu-tartan-wave-full-color-crop-03.png");
 $img-title: url("https://pbs.twimg.com/media/EU7kD4EWoAAAU-8.jpg");
-$img-logo-rgb: url("https://raw.githubusercontent.com/erinbugbee/2023CLIHC-SpeedyIBL-Workshop/main/Slides/images/cmu-wordmark-horizontal-70k.svg?token=GHSAT0AAAAAACG4YWF6BH3NYXYQEJKAQB3IZJQDIIA");
-$img-logo-white: url("https://raw.githubusercontent.com/erinbugbee/2023CLIHC-SpeedyIBL-Workshop/main/Slides/images/cmu-wordmark-horizontal-w.svg?token=GHSAT0AAAAAACG4YWF65H26Z4NP4RQPWZMGZJQDIVA");
+$img-logo-rgb: url("https://raw.githubusercontent.com/erinbugbee/2023CLIHC-SpeedyIBL-Workshop/main/Slides/images/cmu-wordmark-horizontal-70k.svg");
+
+$img-logo-white: url("https://raw.githubusercontent.com/erinbugbee/2023CLIHC-SpeedyIBL-Workshop/main/Slides/images/cmu-wordmark-horizontal-w.svg");
 $logo-pos: 10% 98% !default;
 $logo-size: 20% !default;
 
@@ -62,10 +63,10 @@ $light-bg-code-color: darken($code-color, 15%);
 // TITLE SLIDE 
 .reveal .slide-background.quarto-title-block {
     background-color: $presentation-heading-color;
-    background-image: $img-title, $img-logo-white;
-    background-size: 120%, $logo-size;
-    background-position: 0% 0%;
-    background-repeat: no-repeat;
+    background-image: $img-title;
+    background-size: 100%;
+    background-position: 0%;
+    background-repeat: repeat;
 }
 
 #title-slide {

@@ -10,7 +10,7 @@ author:
 subtitle: "CLIHC 2023, Puebla, Mexico"
 format:
     revealjs:
-      incremental: true   
+#      incremental: true   
       slide-number: true
       theme: custom_cmu.scss
 editor: visual
@@ -213,15 +213,25 @@ $$
 
 ## SpeedyIBL Library [@nguyen2022]
 
+![](images/speedyIBL.png){fig-align="center"}
+
+## Motivation
+
+-   An open-source, efficient library facilitates the implementation of models based on IBLT mechanisms
+
+-   Demonstrate how to use SpeedyIBL to handle a diverse taxonomy of individual and multiagent decision-making tasks
+
+## Demonstrations
+
+![](images/demonstrations.gif){fig-align="center"}
+
 ## Notebook: [*Introduction_SpeedyIBL.ipynb*](https://github.com/DDM-Lab/2023CLIHC-SpeedyIBL-Workshop/blob/main/Introduction_SpeedyIBL.ipynb)
 
-### Installing SpeedyIBL Library
-
-. . .
+## Installing SpeedyIBL Library
 
 ::: {#cloud}
 ::: nonincremental
-1.  **Using cloud-based online Jupyter Notebook such as Google Colab:**
+**Using online Jupyter Notebook such as [Google Colab](https://colab.research.google.com/):**
 :::
 
 ```{python}
@@ -230,11 +240,13 @@ pip install -U speedyibl
 ```
 :::
 
-. . .
+![](images/install.png)
+
+## Installing SpeedyIBL Library
 
 ::: {#local}
 ::: nonincremental
-2.  **Running locally:**
+**Running locally:**
 
 -   Must have Python 3 installed
 -   (suggestion) Create a virtual Python Environment by running the following commands in your shell.
@@ -242,101 +254,98 @@ pip install -U speedyibl
 
 ```{python}
 #| eval: false
+# Use venv module by entering the following commands in your shell:
 python3 -m venv env
-
 source env/bin/activate
-
 pip install -U speedyibl
+
+# OR use conda commands (with Miniconda/Anaconda installed):
+conda create -n myenv python=3.9
+conda activate myenv
+pip install -U speedyibl	
 ```
 :::
 
-### Import the class Agent
+## An IBL Agent with SpeedyIBL
+
+### Import the class `Agent` from `speedyibl`
 
 ```{python}
 from speedyibl import Agent
 ```
 
-### Inputs of the class Agent
+![](images/agent.png){fig-align="center"}
+
+## Attributes (properties) of the class `Agent`
 
 ![](images/inputs.png){fig-alt="Description of inputs of the class Agent"}
 
-### Functions of the class Agent
+### To view the list of attributes:
+
+```{python}
+
+help(Agent.__init__)
+```
+
+## Functions (methods) of the class `Agent`
 
 ![](images/functions.png){fig-alt="Functions of the class Agent"}
 
-## Example: Binary Choice Task
+### To display the list of methods:
+
+```{python}
+dir(Agent)
+vars(Agent)
+```
+
+## SpeedyIBL for Binary Choice Task
+
+![](images/binary_choice.png){fig-align="center"}
 
 ## Notebook: [*Demonstration_BinaryChoice.ipynb*](https://github.com/DDM-Lab/2023CLIHC-SpeedyIBL-Workshop/blob/main/Demonstration_BinaryChoice.ipynb)
 
 ### The Binary Choice Task
 
--   Choose one of two options: Option A or Option B
+![](images/binary_cycle.png){fig-align="center"}
 
-    -   One option is **SAFE** always yielding a fixed medium outcome (3)
+-   Choose one of two options: **Option A** or **Option B**
 
-    -   One option is **RISKY** yielding a high outcome (4) with probability of 0.8, and a low outcome (0) with the complementary probability of 0.2
+    -   One option is **SAFE,** always yielding a fixed medium outcome (3)
 
-### Human Data
+    -   One option is **RISKY,** yielding a high outcome (4) with probability of 0.8, and a low outcome (0) with the complementary probability of 0.2
 
--   Example of data from human experiments from @lebiere2007
+-   **Single-state** with **immediate** feedback task
 
-![](images/binarychoice_human.png){fig-align="center"}
+## Create an Environment for the Binary Choice Task
 
-### Building an Agent
+![](images/environment.png){fig-align="center"}
 
-. . .
-
-::: {#build}
-::: nonincremental
--   Create an IBL agent for the binary choice task
-
-    -   Using the defaults for noise, decay, mismatchPenalty, and lendeque, we only need to pass the value of default utility
-
-```{python}
-agent = Agent(default_utility = 4.4)
-```
-:::
-:::
-
-### Defining and Choosing Options
-
-. . .
+### Defining Options
 
 ::: {#options}
 ::: nonincremental
 -   Define a list of options for the agent to choose
 
 ```{python}
-options = ["A", "B"] # A is the safe option while B is the risky one
+#| eval: false
+options = ['A', 'B'] # A is the safe option while B is the risky one
 ```
 :::
 :::
 
-. . .
-
-::: {#choose}
-::: nonincremental
--   Make the IBL agent choose one of the two options
-:::
-
-```{python}
-choice = agent.choose(options)
-```
-:::
-
-### Generate Reward
-
-. . .
+### Defining Reward
 
 ::: {#reward}
 ::: nonincremental
--   Define a function returning a reward that the agent will receive after choosing one option.
+-   Define the reward for choosing an option
 :::
 
 ```{python}
+#| eval: false
 import random
+
 def reward(choice):
-  if choice == "A":
+  if choice == 'A':
     r = 3
   elif random.random() <= 0.8:
     r = 4
@@ -346,24 +355,84 @@ def reward(choice):
 ```
 :::
 
-### Observe Reward
+### Putting Together in Class `BinaryChoice`
 
-. . .
+```{python}
+import random 
+
+class BinaryChoice:
+  def __init__(self):
+    self.options = ['A', 'B']
+    
+  def reward(self, choice):
+    if choice == 'A':
+      r = 3
+    elif random.random() <= 0.8:
+      r = 4
+    else:
+      r = 0
+    return r
+```
+
+### Declare an Environment
+
+```{python}
+env = BinaryChoice()
+```
+
+### Building an Agent for the Binary Choice Task
+
+Create an IBL agent for the binary choice task:
+
+::: {#build}
+::: nonincremental
+-   Indicating a value of `default_utility`
+
+```{python}
+from speedyibl import Agent
+
+agent = Agent(default_utility = 4.4)
+```
+
+-   Indicating values for parameters, e.g. `noise` and `decay`
+
+```{python}
+#| eval: false
+agent = Agent(default_utility = 4.4, noise = 0.1, decay = 0.8)
+```
+:::
+:::
+
+## Interactions Between the Agent and the Task: Actions
+
+![](images/interactions.png){fig-align="center"}
+
+### Choose Option
+
+-   Make the agent choose one of two options:
+
+```{python}
+choice = agent.choose(env.options)
+```
+
+## Interactions Between the Agent and the Task: Observations and Rewards
+
+![](images/interactions_obs_rewards.png){fig-align="center"}
+
+### Observe Reward
 
 ::: {#respond}
 ::: nonincremental
--   After choosing one option and observing the reward, use the function respond
+-   After choosing one option, the agent observes the reward and stores an instance in memory using the function `respond`:
 :::
 
 ```{python}
-r = reward(choice)
+r = env.reward(choice)
 agent.respond(r)
 ```
 :::
 
-### View Instances
-
-. . .
+### View the Agent's Memory
 
 ::: {#instances}
 ::: nonincremental
@@ -375,87 +444,82 @@ agent.instances()
 ```
 :::
 
-### Compute Activation, Probability, and Blended Values
+-   Example:
 
-. . .
+![](images/memory.png){fig-align="center"}
 
-::: {#activation}
-#### Activation {.nonincremental}
+## IBL Agent's Decision Mechanisms
+
+### Activation of Each Instance
 
 ```{python}
-print(agent.CompActivation(agent.t+1, "A"))
-print(agent.CompActivation(agent.t+1, "B"))
+print(agent.CompActivation(agent.t+1, 'A'))
+print(agent.CompActivation(agent.t+1, 'B'))
 ```
-:::
 
-. . .
-
-::: {#probability-of-retrieval}
-#### Probability {.nonincremental}
+### Probability of Retrieving Each Instance
 
 ```{python}
 print(agent.CompProbability(agent.t+1, "A"))
 print(agent.CompProbability(agent.t+1, "B"))
 ```
-:::
 
-. . .
-
-::: {#blended-values}
-#### Blended Values {.nonincremental}
+### Blended Value for Each Option
 
 ```{python}
-print(agent.CompBlended(agent.t+1, options))
+print(agent.CompBlended(agent.t+1, env.options))
 ```
-:::
 
 ### Simulating Choices for Many Rounds
 
-. . .
+-   Let the agent play 100 rounds (trials) for the binary choice task
+    -   Each round includes *choosing* one option, *observing* the reward, and *storing* the instance
+
+![](images/rounds.png){fig-align="center"}
+
+### Simulating Choices for Many Rounds: Code
 
 ::: {#simulation}
-::: nonincremental
--   Conducting 1000 runs of 100 trials for the binary choice task, where each trial includes choosing one option, observing the reward, and storing the instance
-:::
-
 ```{python}
-import time # to calculate time
-runs = 1000 # number of runs (participants)
-trials = 100 # number of trials (episodes)
-average_p = [] # to store average of performance (proportion of maximum reward expectation choice)
-average_time = [] # to save time
+rounds = 100 # number of rounds (trials)
+pmax = []
+for i in range(rounds):
+  choice = agent.choose(env.options) # choose one option from the list of options
+  r = env.reward(choice) # observe the reward
+  agent.respond(r) # store the instance
+  pmax.append(choice == 'B')
+  
+print(f"P(Max): {sum(pmax)/rounds}")
 ```
 :::
 
-### Simulating Choices for Many Rounds
+### Simulating Choices for Many Runs
 
-. . .
+-   Let's have 500 runs (500 subjects) playing 100 rounds of the task
+
+![](images/runs.png){fig-align="center"}
+
+### Simulating Choices for Many Runs: Code
 
 ```{python}
 #| class-source: small_code
 #| classes: small_code
 
-for r in range(runs):
+runs = 500
+rounds = 100 # number of rounds (trials)
+pmax_per_run = []
+for j in range(runs):
   pmax = []
-  ttime = [0]
-  agent.reset() #clear the memory for a new run
-  for i in range(trials):
-    start = time.time()
-    choice = agent.choose(options) # choose one option from the list of two
-    # determine the reward that agent can receive
-    r = reward(choice)
-    # store the instance
-    agent.respond(r)
-    end = time.time()
-    ttime.append(ttime[-1] + end - start)
-    pmax.append(choice == "B")
-  average_p.append(pmax) # save performance of each run
-  average_time.append(ttime) # save time of each run
+  agent.reset() # clear the memory for a new run
+  for i in range(rounds):
+    choice = agent.choose(env.options) # choose one option from the list of options
+    r = env.reward(choice) # observe the reward
+    agent.respond(r) # store the instance
+    pmax.append(choice == 'B')
+  pmax_per_run.append(pmax)
 ```
 
-### Plotting Performance over Rounds
-
-. . .
+### Plotting Performance (PMAX) over Rounds
 
 ```{python}
 #| fig-align: "center"
@@ -463,20 +527,43 @@ for r in range(runs):
 import matplotlib.pyplot as plt
 import numpy as np
 plt.figure(figsize=(5, 3.5))
-plt.plot(range(trials), np.mean(np.asarray(average_p), axis=0), "o-", color = "darkgreen", markersize = 2, linestyle = '--', label = 'speedyIBL')
-plt.xlabel("Round")
-plt.ylabel("PMAX")
-plt.title("Performance")
-plt.legend()
+plt.plot(range(rounds), np.mean(pmax_per_run,axis=0), color='darkgreen',
+          markersize=2, linestyle='--', label='speedyIBL')
+plt.xlabel('Round')
+plt.ylabel('PMAX')
+plt.title('Performance')
+plt.ylim(0,1)
 plt.grid(True)
 plt.show()
 ```
 
+## Exercise 1
+
+-   Simulate the effect of the IBL model inputs in the Binary Choice Task
+
+    -   `default_utility` of 3, `noise` of 0.25, and `decay` of 0.5
+
+    -   `default_utility` of 4.4, `noise` of 0.5, and `decay` of 0.8
+
+## Exercise 2
+
+-   The table below from [@hertwig2004] presents the proportion of maximization obtained from experimentation in **Humans**
+
+    -   Simulate the Problem 5
+
+    -   Compare the IBL agents' PMAX vs. Humans' PMAX (Pmax2 column)
+
+![](images/human_data.png){fig-align="center"}
+
 # Building an IBL Model for the Iowa Gambling Task
 
-## Iowa Gambling Task: Beginning
+## Iowa Gambling Task History
 
-. . .
+-   Developed by researchers to study risky decision making [@bechara1994]
+
+-   Widely used to study human cognition
+
+## Iowa Gambling Task Demo
 
 ::: {#igt}
 ::: nonincremental
@@ -493,8 +580,6 @@ plt.show()
 . . .
 
 ## Iowa Gambling Task: Choices
-
-. . .
 
 ::: {#igt2}
 ::: nonincremental
@@ -535,7 +620,7 @@ plt.show()
 ## Steps
 
 6.  Run the simulation and observe the plots for `default_utility=110` and `default_utility=10`
-7.  Vary the noise and decay parameters and plot the `PMAX` and `Average`Reward over rounds with `default_utility=110`
+7.  Vary the noise and decay parameters and plot the `PMAX` and `AverageReward` over rounds with `default_utility=110`
 8.  Run the simulation for varied parameter values and plot results
 
 ## Notebook: [*Solution_IowaGambling.ipynb*](https://github.com/DDM-Lab/2023CLIHC-SpeedyIBL-Workshop/blob/main/Solution_IowaGambling.ipynb)
