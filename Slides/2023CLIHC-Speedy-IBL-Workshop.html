@@ -743,7 +743,7 @@ __init__(self, default_utility=0.1, noise=0.25, decay=0.5, mismatchPenalty=None,
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="bu">vars</span>(Agent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>mappingproxy({'__module__': 'speedyibl.speedyibl', 'mkid': 0, '__init__': &lt;function Agent.__init__ at 0x128827430&gt;, 'respond': &lt;function Agent.respond at 0x1288bf1f0&gt;, 'populate_at': &lt;function Agent.populate_at at 0x1288bf280&gt;, 'make_noise': &lt;function Agent.make_noise at 0x1288bf310&gt;, 'choose': &lt;function Agent.choose at 0x1288bf3a0&gt;, 'reset': &lt;function Agent.reset at 0x1288bf430&gt;, 'instances': &lt;function Agent.instances at 0x1288bf4c0&gt;, 'prepopulate': &lt;function Agent.prepopulate at 0x1288bf550&gt;, 'similarity': &lt;function Agent.similarity at 0x1288bf5e0&gt;, 'get_similarity': &lt;function Agent.get_similarity at 0x1288bf670&gt;, 'equal_delay_feedback': &lt;function Agent.equal_delay_feedback at 0x1288bf700&gt;, 'CompActivation': &lt;function Agent.CompActivation at 0x1288bf790&gt;, 'CompProbability': &lt;function Agent.CompProbability at 0x1288bf820&gt;, 'CompBlended': &lt;function Agent.CompBlended at 0x1288bf8b0&gt;, '__dict__': &lt;attribute '__dict__' of 'Agent' objects&gt;, '__weakref__': &lt;attribute '__weakref__' of 'Agent' objects&gt;, '__doc__': None})</code></pre>
+<pre><code>mappingproxy({'__module__': 'speedyibl.speedyibl', 'mkid': 0, '__init__': &lt;function Agent.__init__ at 0x10a433430&gt;, 'respond': &lt;function Agent.respond at 0x10a4cb1f0&gt;, 'populate_at': &lt;function Agent.populate_at at 0x10a4cb280&gt;, 'make_noise': &lt;function Agent.make_noise at 0x10a4cb310&gt;, 'choose': &lt;function Agent.choose at 0x10a4cb3a0&gt;, 'reset': &lt;function Agent.reset at 0x10a4cb430&gt;, 'instances': &lt;function Agent.instances at 0x10a4cb4c0&gt;, 'prepopulate': &lt;function Agent.prepopulate at 0x10a4cb550&gt;, 'similarity': &lt;function Agent.similarity at 0x10a4cb5e0&gt;, 'get_similarity': &lt;function Agent.get_similarity at 0x10a4cb670&gt;, 'equal_delay_feedback': &lt;function Agent.equal_delay_feedback at 0x10a4cb700&gt;, 'CompActivation': &lt;function Agent.CompActivation at 0x10a4cb790&gt;, 'CompProbability': &lt;function Agent.CompProbability at 0x10a4cb820&gt;, 'CompBlended': &lt;function Agent.CompBlended at 0x10a4cb8b0&gt;, '__dict__': &lt;attribute '__dict__' of 'Agent' objects&gt;, '__weakref__': &lt;attribute '__weakref__' of 'Agent' objects&gt;, '__doc__': None})</code></pre>
 </div>
 </div>
 </section>
@@ -922,11 +922,11 @@ B               4.4  [0]</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="bu">print</span>(agent.CompActivation(agent.t<span class="op">+</span><span class="dv">1</span>, <span class="st">'A'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(array([-0.33039595]), array([4.4]))</code></pre>
+<pre><code>(array([-0.13176379]), array([4.4]))</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="bu">print</span>(agent.CompActivation(agent.t<span class="op">+</span><span class="dv">1</span>, <span class="st">'B'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(array([-0.21844504, -1.77632176]), array([4. , 4.4]))</code></pre>
+<pre><code>(array([-0.25513893, -0.9671108 ]), array([4. , 4.4]))</code></pre>
 </div>
 </div>
 </section>
@@ -939,7 +939,7 @@ B               4.4  [0]</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a><span class="bu">print</span>(agent.CompProbability(agent.t<span class="op">+</span><span class="dv">1</span>, <span class="st">"B"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(array([0.67981134, 0.32018866]), array([4. , 4.4]))</code></pre>
+<pre><code>(array([0.71589009, 0.28410991]), array([4. , 4.4]))</code></pre>
 </div>
 </div>
 </section>
@@ -948,7 +948,7 @@ B               4.4  [0]</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a><span class="bu">print</span>(agent.CompBlended(agent.t<span class="op">+</span><span class="dv">1</span>, env.options))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[(4.4, 0), (4.161892933694627, 1)]</code></pre>
+<pre><code>[(4.4, 0), (4.026979046975584, 1)]</code></pre>
 </div>
 </div>
 </section>
@@ -976,7 +976,7 @@ B               4.4  [0]</code></pre>
 <span id="cb30-8"><a href="#cb30-8"></a>  </span>
 <span id="cb30-9"><a href="#cb30-9"></a><span class="bu">print</span>(<span class="ss">f"P(Max): </span><span class="sc">{</span><span class="bu">sum</span>(pmax)<span class="op">/</span>rounds<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>P(Max): 0.71</code></pre>
+<pre><code>P(Max): 0.82</code></pre>
 </div>
 </div>
 </div>
