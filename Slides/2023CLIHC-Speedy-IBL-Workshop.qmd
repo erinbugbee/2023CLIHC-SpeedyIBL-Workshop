@@ -10,11 +10,11 @@ author:
 subtitle: "CLIHC 2023, Puebla, Mexico"
 format:
     revealjs:
-      incremental: true   
+   #   incremental: true   
       slide-number: true
       theme: custom_cmu.scss
       logo: images/ddmlablogo.png
-      touch: false
+      touch: true
       controls: true
 
 editor: visual
