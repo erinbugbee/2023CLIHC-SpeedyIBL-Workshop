@@ -10,9 +10,13 @@ author:
 subtitle: "CLIHC 2023, Puebla, Mexico"
 format:
     revealjs:
-#      incremental: true   
+      incremental: true   
       slide-number: true
       theme: custom_cmu.scss
+      logo: images/ddmlablogo.png
+      touch: false
+      controls: true
+
 editor: visual
 bibliography: references.bib
 csl: apa-single-spaced.csl
@@ -21,8 +25,8 @@ execute:
   echo: true
 engine: knitr
 embed-resources: false
-#title-slide-attributes: 
-#  background-image: "https://www.cmu.edu/dietrich/sds/ddmlab/imgs/ddmlablogo.png"
+resources:
+  2023CLIHC-Speedy-IBL-Workshop.pdf
 ---
 
 ## Agenda
@@ -36,7 +40,15 @@ embed-resources: false
 
 ## Complex, Dynamic Decision Making (DDM)
 
+::: columns
+::: {.column width="40%"}
+![](images/dynamic.png){fig-align="center"}
+:::
+
+::: {.column width="60%" style="font-size: 25px;"}
 -   Dynamic and sequential multi-attribute decisions that are interdependent over-time
+
+<!-- -->
 
 -   High uncertainty and change at different time scales 
 
@@ -45,14 +57,24 @@ embed-resources: false
 -   There is not enough time for considering all alternatives before making a choice
 
 -   Human cognitive abilities (attention, memory) are limited
+:::
+:::
 
 ## Machine AI and Complex Societal DDM Problems
 
+::: columns
+::: {.column width="40%"}
+![](images/societal.jpg)
+:::
+
+::: {.column width="60%" style="font-size: 25px;"}
 -   Machine AI is supporting complex DDM problems in multiple ways --- aggregating data, detecting patterns, and forecasting and projecting events based on data
 -   But often there is not enough data, particularly regarding high-level decisions
     -   Requires a deep understanding of context, consideration of multiple and possibly conflicting factors and their consequences
 
     -   The incorporation of ethical and moral trade-offs
+:::
+:::
 
 ------------------------------------------------------------------------
 
@@ -78,6 +100,12 @@ embed-resources: false
 
 ## Cognitive AI
 
+::: columns
+::: {.column width="50%"}
+![](images/brain.jpg){fig-align="center"}
+:::
+
+::: {.column width="50%" style="font-size: 25px;"}
 -   **Cognitively-plausible algorithms that emulate human decision making**
 
 -   Based on cognitive theory: explain how humans make dynamic decisions, including the prediction of cognitive biases and errors in the absence of data
@@ -87,6 +115,8 @@ embed-resources: false
 -   Can represent human experience and be synchronized with human actions
 
 -   Can become collaborators with humans in teams
+:::
+:::
 
 ## Building Human-Like Artificial Agents using IBLT
 
@@ -116,10 +146,10 @@ A single system (mind) produces all aspects of human behavior
 :::
 :::
 
-## ACT-R: A unified theory of cognition [@anderson1998]
+### ACT-R: A unified theory of cognition [@anderson1998]
 
 ::: columns
-::: {.column width="40%"}
+::: {.column width="35%"}
 ::: columns
 ::: {.column width="50%"}
 ![](images/john_anderson.png){width="200"}
@@ -131,14 +161,16 @@ A single system (mind) produces all aspects of human behavior
 :::
 :::
 
-::: {.column width="60%"}
+::: {.column width="65%" style="font-size: 25px;"}
+![](images/ACTR.png){fig-align="center" width="800"}
+
 -   Symbolic representations of Declarative and Procedural Memories 
 
--   Statistical/Mathematical Mechanisms for processing, accessing, and retrieving memories, and learning and adapting behavior\
+-   Statistical/Mathematical Mechanisms for processing, accessing, and retrieving memories, and learning and adapting behavior
 :::
 :::
 
-## IBLT: Cognitive Algorithm for Dynamic Decision Making [@gonzalez2003]
+### IBLT: Cognitive Algorithm for Dynamic Decision Making [@gonzalez2003]
 
 ::: columns
 ::: {.column width="50%" style="font-size: 25px;"}
@@ -177,9 +209,37 @@ A single system (mind) produces all aspects of human behavior
 :::
 :::
 
-## IBLT Mathematical Mechanisms
+### IBLT Mathematical Mechanisms
 
-ACT-R's Activation Equation
+::: columns
+::: {.column width="50%"}
+$i = \text{instance}$
+
+$k = \text{choice option}$
+
+$t = \text{time}$
+
+$j = \text{feature}$
+:::
+
+::: {.column width="50%"}
+#### Functions and Parameters
+
+$\xi_{ik_it} = \text{Draw from distribution}$
+
+$\alpha = \text{Mismatch Penalty}$
+
+$\sigma = \text{Noise}$
+
+$\delta = \text{Decay}$
+
+$\tau = \text{Temperature}$
+:::
+:::
+
+### IBLT Mathematical Mechanisms
+
+#### ACT-R's Activation Equation
 
 $$
 \Lambda_{ik_it} = \ln{\left(\sum\limits_{t' \in T_{ik_it} }(t-t')^{-d}\right)} +
@@ -191,19 +251,19 @@ $$
 
 ------------------------------------------------------------------------
 
-Probability of Retrieval
+#### Probability of Retrieval
 
 $$
 P_{i k_i t} = \frac{e^{\Lambda_{ik_it}/\tau}}{\sum_{j = 1}^{n_{kt}}e^{\Lambda_{jk_jt}/\tau}}
 $$
 
-Blended Value
+#### Blended Value
 
 $$
 V_{kt} = \sum_{i=1}^{n_{kt}}P_{ik_it}x_{i k_i t}
 $$
 
-Action Selection
+#### Action Selection
 
 $$
   a_l = \arg\max_{a\in A}  V_{(s_l,a),t}
@@ -225,7 +285,7 @@ $$
 
 ![](images/demonstrations.gif){fig-align="center"}
 
-## Notebook: [*Introduction_SpeedyIBL.ipynb*](https://github.com/DDM-Lab/2023CLIHC-SpeedyIBL-Workshop/blob/main/Introduction_SpeedyIBL.ipynb)
+## Notebook: [*01_Introduction_SpeedyIBL.ipynb*](https://github.com/DDM-Lab/2023CLIHC-SpeedyIBL-Workshop/blob/solution/01_Introduction_SpeedyIBL.ipynb)
 
 ## Installing SpeedyIBL Library
 
@@ -302,7 +362,7 @@ vars(Agent)
 
 ![](images/binary_choice.png){fig-align="center"}
 
-## Notebook: [*Demonstration_BinaryChoice.ipynb*](https://github.com/DDM-Lab/2023CLIHC-SpeedyIBL-Workshop/blob/main/Demonstration_BinaryChoice.ipynb)
+## Notebook: [*02_Exercise_BinaryChoice.ipynb*](https://github.com/DDM-Lab/2023CLIHC-SpeedyIBL-Workshop/blob/solution/02_Exercise_BinaryChoice.ipynb)
 
 ### The Binary Choice Task
 
@@ -607,7 +667,7 @@ plt.show()
 
 -   For each card chosen, there is a 50% chance of having to pay a penalty as well. For decks A and B, the penalty is \$250, whereas for decks C and D it is \$50.
 
-## Notebook: [*Exercise_IowaGambling.ipynb*](https://github.com/DDM-Lab/2023CLIHC-SpeedyIBL-Workshop/blob/main/Exercise_IowaGambling.ipynb)
+## Notebook: [*03_Exercise_IowaGambling.ipynb*](https://github.com/DDM-Lab/2023CLIHC-SpeedyIBL-Workshop/blob/main/03_Exercise_IowaGambling.ipynb)
 
 ### Steps
 
@@ -623,7 +683,7 @@ plt.show()
 7.  Vary the noise and decay parameters and plot the `PMAX` and `AverageReward` over rounds with `default_utility=110`
 8.  Run the simulation for varied parameter values and plot results
 
-## Notebook: [*Solution_IowaGambling.ipynb*](https://github.com/DDM-Lab/2023CLIHC-SpeedyIBL-Workshop/blob/main/Solution_IowaGambling.ipynb)
+## Notebook: [*04_Solution_IowaGambling.ipynb*](https://github.com/DDM-Lab/2023CLIHC-SpeedyIBL-Workshop/blob/solution/04_Solution_IowaGambling.ipynb)
 
 # Conclusion
 
@@ -682,7 +742,11 @@ We would be happy to hear your feedback on this workshop. What worked well, and 
 
 ## Thank you!
 
-DDMLab: [www.cmu.edu/ddmlab](www.cmu.edu/ddmlab)
+Sponsors:
+
+![](images/sponsors.png){fig-align="center"}
+
+DDMLab Website: [www.cmu.edu/ddmlab](www.cmu.edu/ddmlab)
 
 Interested in building IBL models?
 

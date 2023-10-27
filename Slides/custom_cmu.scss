@@ -46,10 +46,12 @@ $light-bg-code-color: darken($code-color, 15%);
 }
 
 .reveal.has-logo .slide-number {
-    bottom: 10px !important;
-    right: 10px !important;
-    top: unset !important;
+//    bottom: 10px !important;
+//    right: 10px !important;
+//    top: unset !important;
     color: $body-color !important;
+    top: 14px !important;
+    right: 10px !important;
 }
 
 .reveal .progress {
@@ -108,4 +110,16 @@ $light-bg-code-color: darken($code-color, 15%);
 
 .reveal .slide.level1 > h1 {
     color: #ffffff;
+}
+
+
+
+.reveal .slide-logo {
+  height: 10% !important;
+  right: 10px !important;
+//  width: 20% !important;
+  max-width: unset !important;
+  max-height: unset !important;
+//  top: 0 !important;
+//  right: 10px !important;
 }
